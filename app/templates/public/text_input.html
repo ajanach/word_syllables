@@ -1,0 +1,33 @@
+{% extends 'public/templates/public_templates.html' %}
+
+{% block title  %} Welcome back {% endblock  %}
+
+{% block  main %} 
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>German word syllables - text input</h1>
+                <hr>
+                <form action="text-input" method="POST">
+                    <div class="form-floating mb-3">
+                        <label for="floatingInput">Type word or sentence</label>
+                        <input name="sentence" type="text" class="form-control" id="floatingInput" placeholder="Text">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Go/Reset</button>
+                </form>
+                <br>
+                <h3>Result:</h3>
+                <h5>Given text:</h5>
+                <p>{{ sentence }}</p>
+                <h5>Text divided into syllables:</h5>
+                <p>{{ entry }}</p>
+
+                <a href="/">
+                    <button class="btn btn-primary">Go back.</button>
+                 </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}
