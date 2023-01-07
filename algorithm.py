@@ -7,27 +7,18 @@ consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "
 
 prefixes = ["an", "ab", "auf", "aus", "dis", "ein", "fehl", "her", "hin", "haupt", "in", "dar", "durch", "los", "mit",
             "nach", "von", "vor", "weg", "um", "un", "ur", "ent", "er", "ver", "zer", "miss", "miß", "niss", "niß",
-            "ex", "non", "super", "trans", "kon", "hoch", "stink", "stock", "tief", "tod", "erz"]
+            "ex", "non", "super", "trans", "kon", "hoch", "stink", "stock", "tief", "tod", "erz", "unter", "über", "hinter", 
+            "wider", "wieder", "weiter", "zurück", "zurecht", "zusammen", "hyper", "inter"]
 
 splitting = ["VCCV", "VCCCV", "VCV", "VV"]
 
-#sentence = str("knie, die knie, der knie, reise knie, Reise das reise knie, amour knie, Autobahn, absint" \
-#               "Beziehungsknatsch, tschad, Borretschgewächs, Beziehungsknatsch Gletscher Beziehungsknatsch" 
-
-#sentence = "Diät, Knie, die knie, der knie, reise, knie, Auto, Seeufer, Katze, Tatze, Pfütze, putzen, platzen, Bürste, Kiste, Hamster, Fenster, hinstellen, darstellen, erstarren, plötzlich, Postauto, Kratzbaum,"\
-#            "boxen, heben, rodeln, Schifffahrt, Mussspiel, wichtigsten, besuchen, gewinnen, vergessen, abangeln, Kreuzotter, Poetisch, Nationen, Aber, über, Kreuzklemme, Foxtrott, witzlos, witzig, wegschmeißen,"\
-#            "Bettüberzug, Wirtschaft, Beziehungsknatsch, Gletscher, Wurstscheibe, Borretschgewächs, Bodden, Handball, Neubau, Stalltür"
-
-sentence = "Auto, Poetisch, Nationen, Wirtschaft, Beziehungsknatsch"
-
-def syllabels_rules_exceptions(input_sentence):
+def syllables_rules_exceptions(input_sentence):
     global prefixes
     global vowels
     global consonants
     
     doc_split.MIDDLE_DOT = " "
     sentence_doc_split = doc_split.doc_split(input_sentence)
-    
     sentence_exceptions_knie = sentence_doc_split.split(" ")
     regex_list_of_list = []
     for word in sentence_exceptions_knie:
@@ -43,7 +34,7 @@ def syllabels_rules_exceptions(input_sentence):
         index = 0
         while index < len(sentence_checksum):
             if regex_list[index].lower() == sentence_exceptions_knie[index].lower():
-                if index == 0 and sentence_exceptions_knie[index] == "knie":
+                if index == 0 and sentence_exceptions_knie[index].lower() == "knie":
                     sentence_exceptions_knie[index] = sentence_exceptions_knie[index]
                 elif sentence_exceptions_knie[index - 1][-1:] == "e" and sentence_exceptions_knie[index - 2] == "das" and sentence_exceptions_knie[index - 3][-1:] == "e":
                     sentence_exceptions_knie[index] == sentence_exceptions_knie[index]
@@ -136,13 +127,13 @@ def syllabels_rules_exceptions(input_sentence):
                 
                 if letter_index != 0 and letter_index != sentence_length_01 - tsch_length and letter_index != sentence_length_02 - tsch_length:
                     word = sentence[index]
-                    print(sentence[index], sentence_vc[index][letter_index - 1], sentence_vc[index][letter_index + tsch_length], sentence_vc[index][letter_index + tsch_length + 1])
+                    #print(sentence[index], sentence_vc[index][letter_index - 1], sentence_vc[index][letter_index + tsch_length], sentence_vc[index][letter_index + tsch_length + 1])
                     if sentence_vc[index][letter_index - 1] == "V" and sentence_vc[index][letter_index + tsch_length] == "C" and sentence_vc[index][letter_index + tsch_length + 1] == "V":
                         sentence[index] = word[:letter_index + 4] + " " + word[letter_index + 4:]
-                        print(sentence[index], sentence_vc[index][letter_index - 1], sentence_vc[index][letter_index + tsch_length], sentence_vc[index][letter_index + tsch_length + 1])
+                        #print(sentence[index], sentence_vc[index][letter_index - 1], sentence_vc[index][letter_index + tsch_length], sentence_vc[index][letter_index + tsch_length + 1])
                     if sentence_vc[index][letter_index - 1] == "V" and sentence_vc[index][letter_index + tsch_length] == "V":
                         sentence[index] = word[:letter_index + 1] + " " + word[letter_index + 1:]
-                        print(sentence[index])
+                        #print(sentence[index])
             index += 1
             
     sentence_tsch = ' '.join(sentence)
@@ -154,10 +145,6 @@ def sentence_in_vc(input_sentence):
     
     sentence_letters = list(input_sentence)
     sentence = input_sentence.split(" ")
-    
-    vowels = ["a", "e", "i", "o", "u", "ä", "ö", "ü", "ei", "ai", "ey", "ay", "eu", "äu", "ie", "au", "aa", "ee", "oo"]
-    
-    consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z", "ß", "sch", "ch", "ck", "qu", "ph"]
 
     regex_list_of_list = []  # kreiram prostor za praznu listu u koju će se pohraniti komadići lista jer regex vraća listu
     for word_vc in sentence:  # prolazim kroz sve riječi u obliku V i C
@@ -203,8 +190,9 @@ def sentence_in_vc(input_sentence):
     sentence_vc = ''.join(sentence_letters)
     return sentence_vc
 
-def syllabels_rules_basic(input_sentence):
+def syllables_rules(input_sentence):
     global splitting
+    global vowels
     
     sentence = input_sentence.split(" ")
     sentence_vc = sentence_in_vc(input_sentence).split(" ")
@@ -290,17 +278,36 @@ def syllabels_rules_basic(input_sentence):
                         sentence[index] = word[:letter_index + 1] + " " + word[letter_index + 1:]
                         #print(sentence[index], sentence_vc[index], index)
                     index += 1
-                    
-    sentence_splitting = ' '.join(sentence)
-    return sentence_splitting
-    
-    
 
-prvi_krug = syllabels_rules_basic(syllabels_rules_exceptions(sentence))
-drugi_krug = syllabels_rules_basic(syllabels_rules_exceptions(prvi_krug))
-treci_krug = syllabels_rules_basic(syllabels_rules_exceptions(drugi_krug))
-#print(drugi_krug)
-#print(sentence_in_vc(drugi_krug))
-print()
-print(treci_krug)
-print(sentence_in_vc(treci_krug))
+    sentence_splitting = ' '.join(sentence)
+    sentence_splitting_vc = ' '.join(sentence)
+    sentence = sentence_splitting.split(" ")
+    sentence_vc = sentence_in_vc(sentence_splitting_vc).split(" ")
+                    
+    for split in splitting:       
+        if split == "VV":
+            regex_list_of_list = []  # kreiram prostor za praznu listu u koju će se pohraniti komadići lista jer regex vraća listu
+            for word_vc in sentence_vc:  # prolazim kroz sve riječi u obliku V i C
+                regex = re.findall(r'.*{}.*'.format(split), word_vc)  # regeksom pretražujem koje su to riječi koje tražim
+                if not regex:  # ako regeks nije pronašao match, vratit će praznu listu, ako vrati praznu listu onda će u regex_list_of_list na to mjesto upisati "X"
+                    regex_list_of_list.append("X")
+                else:
+                    regex_list_of_list.append(regex)  # ako je regeks pronašao match, dodaj taj match na mjesto u regex_list_of_list
+            regex_list = [val for sublist in regex_list_of_list for val in sublist]  # pošto imamo listu lista, smanjio sam ju za jedan level s ovim djelom koda
+            #print(regex_list)
+
+            index = 0
+            if len(regex_list) == len(sentence_vc):
+                index = 0
+                while index < len(sentence_vc):
+                    if regex_list[index] == sentence_vc[index]:
+                        letter_index = sentence_vc[index].find(split)
+                        word = sentence[index]
+                        vowels_check = word[letter_index] + word[letter_index + 1]
+                        if vowels_check.lower() not in vowels:
+                            sentence[index] = word[:letter_index + 1] + " " + word[letter_index + 1:]
+                            #print(sentence[index], sentence_vc[index], index)
+                    index += 1
+
+    sentence_splitting = ' '.join(sentence)  # join and remove duplicated spaces in word
+    return re.sub(' +', ' ', sentence_splitting)

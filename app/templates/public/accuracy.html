@@ -1,0 +1,37 @@
+{% extends 'public/templates/public_templates.html' %}
+
+{% block title  %} Welcome back {% endblock  %}
+
+{% block  main %} 
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>German word syllables - accuracy</h1>
+                <hr>
+                
+                <h5>Test words: </h5>
+                <p>["Diät", "Knie", "die knie", "der knie", "reise knie", "Auto", "Seeufer", "Katze", "Tatze", "Pfütze", "putzen", "platzen", "Bürste", "Kiste", "Hamster", "Fenster", "hinstellen", "darstellen", "erstarren", "plötzlich", 
+                    "Postauto", "Kratzbaum", "boxen", "heben", "rodeln", "Schifffahrt", "Mussspiel", "wichtigsten", "besuchen", "gewinnen", "vergessen", "abangeln", "Kreuzotter", "poetisch", "Nationen", "aber", "über", "Kreuzklemme", 
+                    "Foxtrott", "witzlos", "witzig", "wegschmeißen", "Bettüberzug", "wirtschaft", "Beziehungsknatsch", "Gletscher", "Wurstscheibe", "Borretschgewächs", "Bodden", "Handball", "Neubau", "Stalltür", "Autobahnanschlussstelle",
+                    "Laufschuhe", "Baustelle", "Lebkuchen", "Himbeere", "Klassenzimmer", "Hubbleteleskop", "Botschaft", "Schokoladenfabrik", "Hühnersuppe", "Schweinebraten", "Halsschmerzen", "Weltanschauung", "Weltschmerz", "Weihnachtsbaum",
+                    "Kugelschreiber", "Bohnensalat", "Freundschaftsbezeigung", "Weihnachtsmannfigur", "Glasflächenreinigung"]</p>
+                <h5>Verified splitted words: </h5>
+                <p>["Di ät", "Knie", "die kni e", "der kni e", "rei se kni e", "Au to", "See ufer", "Kat ze", "Tat ze", "Pfüt ze", "put zen", "plat zen", "Bürs te", "Kis te", "Hams ter", "Fens ter", "hin stel len", "dar stel len",
+                    "er star ren", "plötz lich", "Post au to", "Kratz baum", "bo xen", "he ben", "ro deln", "Schiff fahrt", "Muss spiel", "wich tigs ten", "be su chen", "ge win nen", "ver ges sen", "ab an geln", "Kreuz ot ter", 
+                    "po e tisch", "Na ti o nen", "a ber", "ü ber", "Kreuz klem me", "Fox trott", "witz los ", "wit zig", "weg schmei ßen", "Bett ü ber zug", "wirt schaft", "Be zieh ungs knatsch", "Glet scher", "Wurst schei be", 
+                    "Bor retsch ge wächs", "Bod den", "Hand ball", "Neu bau", "Stall tür", "Au to bahn an schluss stel le", "Lauf schu he", "Bau stel le", "Leb ku chen", "Him bee re", "Klas sen zim mer", "Hub ble te le skop",
+                    "Bot schaft", "Scho ko la den fa brik", "Hüh ner sup pe", "Schwei ne bra ten", "Hals schmer zen", "Welt an schau ung", "Welt schmerz", "Weih nachts baum", "Ku gel schrei ber", "Boh nen sa lat", "Freund schafts be zei gung",
+                    "Weih nachts mann fi gur", "Glas fläch en rei ni gung"]</p>
+                <br>
+                <h3>Result:</h3>
+                <p>{{ entry }}</p>
+
+                <a href="/">
+                    <button class="btn btn-primary">Go back.</button>
+                 </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}
