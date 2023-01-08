@@ -1,18 +1,18 @@
 # german_word_syllables
 
-# Installation
+## Installation
 To run the app word_syllables, satisfy the requirements:
 ```shell
 pip install -r requirements.txt
 ```
 
-# Set Environment Variables
+## Set Environment Variables
 ```shell
 export FLASK_APP=app.py
 export FLASK_ENV=development
 ```
 
-# Start Server
+## Start Server
 ```shell
 flask run
 ```
